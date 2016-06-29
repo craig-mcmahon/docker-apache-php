@@ -2,12 +2,11 @@ FROM alpine:3.4
 MAINTAINER Craig McMahon
 
 ENV PHP_VERSION="7.0.7-r0" \
-    APACHE_VERSION="2.4.20-r0" \
-    OPENSSL_VERSION="1.0.2h-r0"
+    APACHE_VERSION="2.4.20-r2" \
+    OPENSSL_VERSION="1.0.2h-r1"
 
 # Install modules and updates
 RUN apk update \
-    && apk upgrade \
     && apk --no-cache add \
         openssl=="${OPENSSL_VERSION}" \
         apache2=="${APACHE_VERSION}" \
@@ -24,6 +23,7 @@ RUN apk update \
         php7-dom \
         php7-json \
         php7-mbstring \
+        php7-mcrypt \
         php7-memcached \
         php7-mysqlnd \
         php7-opcache \
