@@ -64,8 +64,6 @@ RUN apk update \
     && rm -rf /var/www/* \
     && echo '<?php phpinfo(); ?>' >  /var/www/index.php
 
-# Define volumes
-VOLUME ["/var/www", "/var/log/apache2", "/etc/apache2/conf.d/custom"]
 
 WORKDIR /var/www
 

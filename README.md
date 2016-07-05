@@ -2,7 +2,7 @@
 
 This is an Alpine based image with apache 2.4 and php7.
 
-The following volumes are defined
+The following volumes are recommended
 
 - /var/www - For your site content
 - /var/log/apache2 - For logs
