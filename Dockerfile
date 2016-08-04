@@ -33,6 +33,7 @@ RUN apk update \
         php7-openssl \
         php7-pdo \
         php7-pdo_mysql \
+        php7-phar \
         php7-session \
         php7-sockets \
         php7-xml \

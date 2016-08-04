@@ -4,11 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.1] - 2016-08-04
+### Added
+- PHP Phar module so we can actually use composer
+
 ## [1.3.0] - 2016-08-01
 ### Added
 - Composer v1.2.0
 
-# Changed
+### Changed
 - PHP Version 7.0.9
 - Apache Version 2.4.23
 
@@ -27,7 +31,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Apache Version: 2.4.20
 - OpenSSL Version: 1.0.2h
 
-[Unreleased]: https://github.com/p13eater/docker-apache-php/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/p13eater/docker-apache-php/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/p13eater/docker-apache-php/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/p13eater/docker-apache-php/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/p13eater/docker-apache-php/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/p13eater/docker-apache-php/compare/v1.0.0...v1.1.0
