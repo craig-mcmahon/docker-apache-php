@@ -1,11 +1,13 @@
 FROM alpine:3.4
 MAINTAINER Craig McMahon
 
-ENV PHP_VERSION="7.0.9-r0" \
+ENV PHP_VERSION="7.0.10-r1" \
     APACHE_VERSION="2.4.23-r1" \
     OPENSSL_VERSION="1.0.2h-r1" \
     COMPOSER_VERSION="1.2.0" \
-    COMPOSER_CHECKSUM="21e6bc3672a3d7df683d1ff85a5f89a857a24e5cf563cc714e9331d9b76bdfc232494599c5188604dce18c6edd0ba8d015ca738537d99e985c58d94b9b466f43  composer.phar"
+    COMPOSER_CHECKSUM="21e6bc3672a3d7df683d1ff85a5f89a857a24e5cf563cc714e9331d9b76bdfc232494599c5188604dce18c6edd0ba8d015ca738537d99e985c58d94b9b466f43  composer.phar" \
+    PHPUNIT_VERSION="5.5.2" \
+    PHPUNIT_CHECKSUM="6ca91fe656b1f92b18f20437abe09bc21e85d003c78a8ec4c2186fe7fcafe28651d4bbcdd4e96799e01740ac8e7af2a7dffe8e5ce7d9d4e4cce6ee7989144467  phpunit-5.5.2.phar"
 
 
 # Install modules and updates
@@ -73,7 +75,14 @@ RUN apk update \
     && sha512sum -c composerchecksum.txt \
     && rm composerchecksum.txt \
     && mv composer.phar /usr/bin/composer \
-    && chmod +x /usr/bin/composer
+    && chmod +x /usr/bin/composer \
+    # Install phpunit
+    && wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar \
+    && echo "${PHPUNIT_CHECKSUM}" > phpunitchecksum.txt \
+    && sha512sum -c phpunitchecksum.txt \
+    && rm phpunitchecksum.txt \
+    && mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit \
+    && chmod +x /usr/bin/phpunit
 
 
 WORKDIR /var/www
