@@ -16,6 +16,7 @@ RUN apk update \
         openssl=="${OPENSSL_VERSION}" \
         apache2=="${APACHE_VERSION}" \
         apache2-ssl \
+        git \
     # Install PHP from testing
     && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/testing add \
         php7=="${PHP_VERSION}" \
@@ -35,6 +36,7 @@ RUN apk update \
         php7-openssl \
         php7-pdo \
         php7-pdo_mysql \
+        php7-pdo_sqlite \
         php7-phar \
         php7-session \
         php7-sockets \
