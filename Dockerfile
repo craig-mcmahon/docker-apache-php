@@ -1,14 +1,14 @@
 FROM alpine:3.4
 MAINTAINER Craig McMahon
 
-ENV PHP_VERSION="7.0.10-r1" \
+ENV PHP_VERSION="7.0.10-r2" \
     APACHE_VERSION="2.4.23-r1" \
-    OPENSSL_VERSION="1.0.2h-r1" \
+    OPENSSL_VERSION="1.0.2h-r4" \
     COMPOSER_VERSION="1.2.0" \
     COMPOSER_CHECKSUM="21e6bc3672a3d7df683d1ff85a5f89a857a24e5cf563cc714e9331d9b76bdfc232494599c5188604dce18c6edd0ba8d015ca738537d99e985c58d94b9b466f43  composer.phar" \
     PHPUNIT_VERSION="5.5.2" \
-    PHPUNIT_CHECKSUM="6ca91fe656b1f92b18f20437abe09bc21e85d003c78a8ec4c2186fe7fcafe28651d4bbcdd4e96799e01740ac8e7af2a7dffe8e5ce7d9d4e4cce6ee7989144467  phpunit-5.5.2.phar"
-
+    PHPUNIT_CHECKSUM="6ca91fe656b1f92b18f20437abe09bc21e85d003c78a8ec4c2186fe7fcafe28651d4bbcdd4e96799e01740ac8e7af2a7dffe8e5ce7d9d4e4cce6ee7989144467  phpunit-5.5.2.phar" \
+    MEMCACHED_CHECKOUT="583ecd68faec886ac9233277531f78fb6e2043c7"
 
 # Install modules and updates
 RUN apk update \
@@ -17,8 +17,10 @@ RUN apk update \
         apache2=="${APACHE_VERSION}" \
         apache2-ssl \
         git \
-    # Install PHP from testing
-    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/testing add \
+    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main add \
+        apache2-http2 \
+    # Install PHP from community
+    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/community add \
         php7=="${PHP_VERSION}" \
         php7-bcmath \
         php7-bz2 \
@@ -26,11 +28,11 @@ RUN apk update \
         php7-common \
         php7-ctype \
         php7-curl \
+        php7-dev \
         php7-dom \
         php7-json \
         php7-mbstring \
         php7-mcrypt \
-        php7-memcached \
         php7-mysqlnd \
         php7-opcache \
         php7-openssl \
@@ -44,6 +46,25 @@ RUN apk update \
         php7-xmlreader \
         php7-apache2 \
     && ln -s /usr/bin/php7 /usr/bin/php \
+
+    # Install memcached extenstion
+    && apk --no-cache add \
+        alpine-sdk \
+        autoconf \
+        zlib-dev \
+        libmemcached-dev \
+    && sed -i -e 's/exec $PHP -C -n/exec $PHP -C/g' /usr/bin/pecl \
+    && ln -s /usr/bin/phpize7 /usr/bin/phpize \
+    && git clone https://github.com/php-memcached-dev/php-memcached.git \
+    && cd php-memcached \
+    && git checkout ${MEMCACHED_CHECKOUT} \
+    && phpize7 \
+    && ./configure --prefix=/usr \
+        --disable-memcached-sasl \
+        --with-php-config=php-config7  \
+    && make \
+    && sudo make install \
+    && echo "extension=memcached.so" > /etc/php7/conf.d/20_memcached.ini \
     && rm /var/cache/apk/* \
 
     # Run required config / setup for apache

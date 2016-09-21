@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Moved from testing php7 alpine repo to community
+
+### Added
+- Apache mod_http2
+
 ## [1.4.1] - 2016-08-24
 ### Added
 - Module pdo_sqlite
