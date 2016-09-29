@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.6.0] - 2016-09-29
+### Changed
+- PHP Version 7.0.11
+- OpenSSL Version: 1.0.2j
+- Composer Version: 1.2.1
+- PHPUnit Version: 5.5.5
+- Back to pre-built version of memcached extension
+
 ## [1.5.0] - 2016-09-21
 ### Changed
 - Moved from testing php7 alpine repo to community
@@ -50,7 +58,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Apache Version: 2.4.20
 - OpenSSL Version: 1.0.2h
 
-[Unreleased]: https://github.com/p13eater/docker-apache-php/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/p13eater/docker-apache-php/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/p13eater/docker-apache-php/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/p13eater/docker-apache-php/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/p13eater/docker-apache-php/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/p13eater/docker-apache-php/compare/v1.3.1...v1.4.0
