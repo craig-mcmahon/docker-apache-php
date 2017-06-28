@@ -1,13 +1,13 @@
-FROM alpine:3.4
+FROM alpine:3.6
 MAINTAINER Craig McMahon
 
-ENV PHP_VERSION="7.0.11-r0" \
-    APACHE_VERSION="2.4.23-r1" \
-    OPENSSL_VERSION="1.0.2j-r0" \
-    COMPOSER_VERSION="1.2.1" \
-    COMPOSER_CHECKSUM="1fee0f09cf73fe177754648a5c8a2f97b9cf8f7943f2b5c1325ace677573f2b623300197af5863e588737a49d43ca075ce4af07e0752e139797815450bd6f9a0  composer.phar" \
-    PHPUNIT_VERSION="5.5.5" \
-    PHPUNIT_CHECKSUM="719271d620cb8395cf68e637aa3b7f9e24f7223328c3cf85a87304d598e17caebf59e05a458e4ff9ddf437313fbb8ec729c05859c4eeb6e28769faa5ba06f3c4  phpunit-5.5.5.phar"
+ENV PHP_VERSION="7.1.5-r0" \
+    APACHE_VERSION="2.4.25-r1" \
+    OPENSSL_VERSION="1.0.2k-r0" \
+    COMPOSER_VERSION="1.4.2" \
+    COMPOSER_CHECKSUM="38bb2a696df65a47f6dfa22907e76c3210731530f51dc70f8e104d8b64e9ff2a40b18ea01f3948664fb7595d0e0c92c18dce1efaed6d1d57f05c28fa76f9966f  composer.phar" \
+    PHPUNIT_VERSION="6.2.2" \
+    PHPUNIT_CHECKSUM="bc5e005b53c0bb5705cef86afbd7dede5e0e8f604de9f27b4c28e020d4fa74c51a8cbf1f289720936f68253845613861e0f934980e61c9f59101f33648b575bc  phpunit-6.2.2.phar"
 
 # Install modules and updates
 RUN apk update \
@@ -15,12 +15,12 @@ RUN apk update \
         openssl=="${OPENSSL_VERSION}" \
         apache2=="${APACHE_VERSION}" \
         apache2-ssl \
-        git \
-    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/main add \
         apache2-http2 \
+        git \
     # Install PHP from community
-    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/community add \
+    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/3.6/community add \
         php7=="${PHP_VERSION}" \
+        php7-apache2 \
         php7-bcmath \
         php7-bz2 \
         php7-calendar \
@@ -32,6 +32,7 @@ RUN apk update \
         php7-json \
         php7-mbstring \
         php7-mcrypt \
+        php7-memcached \
         php7-mysqlnd \
         php7-opcache \
         php7-openssl \
@@ -43,10 +44,6 @@ RUN apk update \
         php7-sockets \
         php7-xml \
         php7-xmlreader \
-        php7-apache2 \
-    && ln -s /usr/bin/php7 /usr/bin/php \
-    && apk --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/testing add \
-        php7-memcached \
     && rm /var/cache/apk/* \
 
     # Run required config / setup for apache

@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.7.0] - 2017-06-28
+### Changed
+- Alpine Version 3.6
+- Apache Version 2.4.25
+- PHP Version 7.1.5 
+- OpenSSL Version 1.0.2k
+- Composer Version 1.4.2
+- PHPUnit Version: 6.2.2
+
 ## [1.6.0] - 2016-09-29
 ### Changed
 - PHP Version 7.0.11
@@ -58,7 +67,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Apache Version: 2.4.20
 - OpenSSL Version: 1.0.2h
 
-[Unreleased]: https://github.com/p13eater/docker-apache-php/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/p13eater/docker-apache-php/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/p13eater/docker-apache-php/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/p13eater/docker-apache-php/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/p13eater/docker-apache-php/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/p13eater/docker-apache-php/compare/v1.4.0...v1.4.1
